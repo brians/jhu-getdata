@@ -11,6 +11,10 @@ if (!file.exists("data")) {
 } else {
     print("./data file (directory) already exists.")
 }
+if (!file.exists("X_train.txt")) {
+    stop("Please unzip data/Dataset.zip and copy required .txt files per README.md")
+    exit
+}
 
 #
 # 1.
@@ -32,7 +36,7 @@ all <- rbind(cbind(subjTrain, actTrain, xTrain),
 
 #
 # 2.
-# Add descriptive variable names from features.txt. Use these names to
+# Add raw variable names from features.txt. Use these names to
 # identify the measurements on the mean and standard deviation for each
 # observation, and retain only those.
 #
@@ -41,15 +45,15 @@ features <- read.table("./features.txt",
 names(features) <- c("featureIndex", "featureName")
 
 # add headings for subject and activity code to the extracted feature names.
-# we extract activity codes here, but we will update them in step (3) to levels
-# labeled with the activity.
+# we extract numeric activity codes here, but we will update them in step (3)
+# to levels labeled with the activity.
 varNames <- c("Subject", "Activity", features$featureName)
 
 # identify columns to retain based on RE pattern.
 meanOrSD <- grep("(-mean|-std)\\(\\)", features$featureName)
 # add the subject and activity indices to the matched features.
 varIndices <- c(1, 2, meanOrSD + 2)
-# this is step (4), but we needed the names to select the columns to keep.
+# prepare for step (4), which corrects the syntactically dubious raw names.
 names(all) <- varNames
 
 # keep the desired columns.
@@ -60,15 +64,16 @@ all <- all[, varIndices]
 # Convert activity indices to descriptive factor labels matching
 # activity names.
 #
-# thanks to scot k waye, PhD.
 labels <- read.table("./activity_labels.txt")
 names(labels) <- c("Index", "Label" )
+# thanks to scot k waye, PhD, from the forum:
 all$Activity <- factor(all$Activity, labels = labels$Label)
 
 #
-# 4. Appropriately label the data set with descriptive variable names. 
+# 4.
+# Appropriately label the data set with descriptive variable names. 
 #
-# "stddev" is more descriptive.
+# "stddev" is more descriptive than "std"
 newNames <- gsub("std\\(\\)", "stddev", varNames[varIndices])
 # drop parens
 newNames <- gsub("\\(\\)", "", newNames)
@@ -91,7 +96,11 @@ newNames[3:length(newNames)] <- gsub("(.*)", "mean.\\1",
 names(averages) <- make.names(newNames)
 write.table(averages, file="averages.txt", row.names = FALSE)
 
-# function to check resulting averages data table
+# end of assignment.
+# spotCheck() is available from the console in case of any worries.
+
+
+# function to check averages data table
 spotCheck <- function(n = 14, e = 1e-6, verbose = F) {
     # n random trials to verify we called melt / dcast correctly
     # for results within error e.
