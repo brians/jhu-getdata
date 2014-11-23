@@ -16,14 +16,15 @@ and six Activities.
 
 Variable descriptions:
 
-"Subject"	integer;range of 1 to 30
-"Activity"	factor; one of WALKING WALKING_UPSTAIRS WALKING_DOWNSTAIRS SITTING STANDING LAYING
+"Subject"	integer; range of 1 to 30
+"Activity"	factor; one of WALKING WALKING_UPSTAIRS WALKING_DOWNSTAIRS
+		SITTING STANDING LAYING
 	
-For the variables below, {X,Y,Z} expands each variable to three, labeled identically except
-one uses "X," one "Y," and one "Z." Similarly, {mean,stddev} expands
-to two variables. These names were automatically derived from the
-Smartlab features.txt file, converted for syntactic compatibility
-with R.
+For the variables below, {X,Y,Z} expands each variable to three,
+labeled identically except one uses "X," one "Y," and one "Z."
+Similarly, {mean,stddev} expands to two variables. These names were
+automatically derived from the Smartlab features.txt file, converted
+for syntactic compatibility with R.
 
 Mean of mean and standard deviations of time domain estimates,
 across three axes:
@@ -46,7 +47,8 @@ mean.fBodyAcc.{mean,stddev}.{X,Y,Z}
 mean.fBodyAccJerk.{mean,stddev}.{X,Y,Z}
 mean.fBodyGyro.{mean,stddev}.{X,Y,Z}
 
-Mean of means and standard deviations of frequency domain magnitude estimates:
+Mean of means and standard deviations of frequency domain magnitude
+estimates:
 
 mean.fBodyAccMag.{mean,stddev}
 mean.fBodyBodyAccJerkMag.{mean,stddev}
