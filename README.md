@@ -26,3 +26,7 @@ The single script requires that the files from the Smartlab _Dataset_:
 - activity_labels.txt
 
 exist in the working directory of run_analysis.R. Sourcing the file suffices to produce "activity.txt," as described in the included codebook.
+
+run_analysis.R also includes a function spotCheck() not used to
+produce activity.txt, but to check correctness of results from any
+reshaping functions under evaluation for future use.
