@@ -11,7 +11,7 @@ deviation estimates Smartlab derived from time domain accelerometer
 and gyroscope observations released as the _Human Activity Recognition
 Using Smartphones Dataset_.  For averages.txt, the Training and
 Test sets from Smartlab are considered as one. Each of sixty-six
-such variables are presented for each combination of thirty Subjects
+such measurement variables are presented for each combination of thirty Subjects
 and six Activities.
 
 Variable descriptions:
